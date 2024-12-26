@@ -1,0 +1,7 @@
+
+1. "Применение метода конечных элементов" *Л. Сегерлинд* (Пер. с англ. "Applied Finite Element Analysis"). [Библиотека МГТУ](https://library.bmstu.ru/ECatalog/ViewDescription.aspx?DescriptionId=57173&return=mode%3ds%26src%3dc%26order%3d0%26keywords%3d%25d1%2581%25d0%25b5%25d0%25b3%25d0%25b5%25d1%2580%25d0%25bb%25d0%25b8%25d0%25bd%25d0%25b4%26vmfrom%3d1%26vmto%3d12%26page%3d0).
+2. "Computational Science and Engineering" *Gilbert Strang*  [amazon.com](https://www.amazon.com/Computational-Science-Engineering-Gilbert-Strang/dp/0961408812)
+3. Онлайн курс "Computational Science and Engineering I" *Gilbert Strang* [MIT Open Courseware](https://ocw.mit.edu/courses/mathematics/18-085-computational-science-and-engineering-i-fall-2008/)
+4. "An Introduction to finite element methos" *J. N. Reddy*  [amazon.com](https://www.amazon.com/Introduction-Element-McGraw-Hill-Mechanical-Engineering/dp/0072466855)
+5. *J. Alberty, C. Carstensen, S. Funken* "Remarks around 50 lines of Matlab: short finite element implementation" *Numerical Algorithms* 20 (1999) 117-137. [doi:10.1023/A:1019155918070](https://link.springer.com/article/10.1023/A:1019155918070)
+6. "Введение в метод конечных элементов" *Ю.А. Сагдеева, С.П. Копысов, А.К. Новиков* [УГУ, Ижевск, 2011](http://elibrary.udsu.ru/xmlui/bitstream/handle/123456789/6649/2011272930.pdf?sequence=1)

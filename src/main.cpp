@@ -1,11 +1,13 @@
 #include <iostream>
 #include "RectangleMesh2D.h"
-
+#include "LinearMesh1D.h"
 
 int main() {
-    std::cout << "Hello from main: Starting program..." << std::endl;
-    RectangleMesh2D proba(4, 6, 5, 5);
-    proba.generateMesh();
-    proba.saveMesh("Mesh.txt");
+    LinearMesh1D proba1(5, 5);
+    proba1.generateMesh();
+    proba1.saveMesh("Mesh1d.txt");
+    proba1.printMesh();
+
+
     return 0;
 }

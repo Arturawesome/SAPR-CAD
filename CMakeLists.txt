@@ -21,6 +21,9 @@ add_executable(SAPR ${SRC_DIR}/main.cpp )
 target_sources(SAPR PUBLIC
     ${MESH_DIR}/Mesh2D.cpp
     ${MESH_DIR}/RectangleMesh2D.cpp
+    ${MESH_DIR}/Mesh1D.cpp
+    ${MESH_DIR}/LinearMesh1D.cpp
+
     ${METHODS_DIR}/Method2D.cpp
     ${METHODS_DIR}/ImplicitMethod2D.cpp
     ${TASKS_DIR}/HeatTask2D.cpp
