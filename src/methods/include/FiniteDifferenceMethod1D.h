@@ -7,7 +7,8 @@
 
 class FiniteDifferenceMethod1D: public Method1D{
 public:
-    ~FiniteDifferenceMethod1D()
+    FiniteDifferenceMethod1D();
+    virtual void getSolution() override;
 
 
 };

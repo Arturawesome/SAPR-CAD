@@ -2,6 +2,7 @@
 #define MESH1D_H
 #include <vector>
 #include <unordered_map>
+#include <string>
 class Mesh1D{
 public:
     virtual ~Mesh1D() = default;

@@ -26,10 +26,7 @@ target_sources(SAPR PUBLIC
     ${MESH_DIR}/RectangleMesh2D.cpp
 
     ${METHODS_DIR}/Method1D.cpp
-    ${METHODS_DIR}/ImplicitMethod1D.cpp
+    ${METHODS_DIR}/FiniteDifferenceMethod1D.cpp
 
-    ${METHODS_DIR}/Method2D.cpp
-    ${METHODS_DIR}/ImplicitMethod2D.cpp
-
-    ${TASKS_DIR}/HeatTask2D.cpp
+    ${TASKS_DIR}/HeatTask1D.cpp
 )
