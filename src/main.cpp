@@ -5,6 +5,7 @@
 #include "FiniteDifferenceMethod1D.h"
 
 int main() {
+
     LinearMesh1D proba1(5, 5);
     proba1.generateMesh();
     proba1.saveMesh("Mesh1d.txt");
@@ -13,17 +14,17 @@ int main() {
     FiniteDifferenceMethod1D numMethod;
 
     std::unordered_map<std::string, std::string> parameterOfTask = {
-        {"isStatic", "True"},
-        {"Time", "0"},
-        {"dt", "0"},
+        //{"isStatic", "True"},
+        //{"time", "0"},
+        //{"dt", "0"},
 
         {"isInternalHeatSource", "False"},
         {"Xsource", "0"},
         {"Ysource", "0"},
 
-        {"Method", "FiniteDifferenceMethod1D"},
+        {"method", "FiniteDifferenceMethod1D"},
 
-        {"MeshType", "LinearMesh1D"},
+        {"meshType", "LinearMesh1D"},
         {"N", "5"},
         {"L", "1"},
 
@@ -32,7 +33,8 @@ int main() {
         {"Tright", "20"}
     };
     HeatTask1D task(parameterOfTask);
-
+    task.getTaskDescription();
+    task.solveTask();
 
     return 0;
 }

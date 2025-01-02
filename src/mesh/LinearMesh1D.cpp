@@ -1,6 +1,7 @@
 #include "LinearMesh1D.h"
 
 LinearMesh1D::LinearMesh1D(int numNodesX, double size_x ){
+    std::cout<<"LinearMesh1D::LinearMesh1D(int numNodesX, double size_x )\n ";
     numNodes['x'] = numNodesX;
     size['x'] = size_x;
 }
@@ -18,6 +19,7 @@ int LinearMesh1D:: GetNumNodes(const char xyz){
 }
 
 void LinearMesh1D::generateMesh(){
+    std::cout<<"void LinearMesh1D::generateMesh()\n";
     dx =  size['x'] / (numNodes['x'] -1);
     for(int i = 0; i < numNodes['x']; ++i){
         nodesPosition.push_back(i * dx);

@@ -7,10 +7,11 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <memory>
 class Task1D{
 protected:
-    Method1D *method;
-    Mesh1D *mesh;
+    std::unique_ptr<Method1D> method;
+    std::unique_ptr<Mesh1D> mesh;
     std::unordered_map<std::string, std::string> paramtersOfTask;
     int dimension;
 
@@ -18,6 +19,7 @@ public:
     virtual ~Task1D() = default;
     virtual void solveTask() = 0;
     virtual void getTaskDescription() = 0;
+
 
 };
 
