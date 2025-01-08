@@ -17,6 +17,7 @@ public:
     virtual void printMesh() override;
     virtual void saveMesh(std::string name_file) override;
     virtual int GetNumNodes(const char xyz) override;
+    virtual double GetNodesPosition(const char xyz, int i) override;
 
 
 private:

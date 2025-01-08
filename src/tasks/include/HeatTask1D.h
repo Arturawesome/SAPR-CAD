@@ -11,22 +11,16 @@ public:
     HeatTask1D(std::unordered_map<std::string, std::string> param);
     virtual void solveTask() override;
     virtual void getTaskDescription() override;
+    virtual void setMatrixAndConditions() override;
 
 private:
 
-    bool useCustomMesh = false;
-    bool useCustomMethod = false;
-
-
-    double time = -1, dt = -1;
-    bool isStatic = true;
-
     bool isInternalHeatSource  = false;
-    double Xsource = -1, Ysource = -1;
+    double Xsource = -1, Ysource = -1, Qsource;
 
     double Tleft = -1, Tright = -1;
     double alpha = -1;
-    double N = 1, L = -1;
+    double L = -1;
 
 };
 

@@ -22,9 +22,11 @@ void LinearMesh1D::generateMesh(){
     std::cout<<"void LinearMesh1D::generateMesh()\n";
     dx =  size['x'] / (numNodes['x'] -1);
     for(int i = 0; i < numNodes['x']; ++i){
+        nodesPosition2['x'].push_back(i * dx);
         nodesPosition.push_back(i * dx);
         if( i == 0 || i ==  numNodes['x']-1){
             boundaryNodesId.push_back(i );
+            boundaryNodesId2['x'].push_back(i );
         }
     }
 
@@ -81,4 +83,6 @@ void LinearMesh1D::saveMesh(std::string name_file) {
 
 
 
-
+double LinearMesh1D:: GetNodesPosition(const char xyz, int i) {
+    return nodesPosition2[xyz][i];
+}

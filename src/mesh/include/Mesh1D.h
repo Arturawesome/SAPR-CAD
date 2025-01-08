@@ -10,10 +10,12 @@ public:
     virtual void saveMesh(std::string name_file) = 0;
     virtual void printMesh() = 0;
     virtual int GetNumNodes(const char xyz) = 0;
+    virtual double GetNodesPosition(const char xyz, int i) = 0;
 
 protected:
     //position of each node
     std::vector<double> nodesPosition;
+    std::unordered_map<char, std::vector<double>> nodesPosition2;
 
     // id of nodes whic create the elements (rectangle element, triangle one or another one)
     std::vector<std::vector<int>> elementsId;
@@ -23,6 +25,7 @@ protected:
 
     // id of nodes which located on the boundary
     std::vector<int> boundaryNodesId;
+    std::unordered_map<char, std::vector<double>> boundaryNodesId2;
 
     // id of nodes which create the element and it element located on the boundary
     std::vector<std::vector<int>> boundaryElements;

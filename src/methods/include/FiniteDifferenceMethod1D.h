@@ -8,8 +8,12 @@
 class FiniteDifferenceMethod1D: public Method1D{
 public:
     FiniteDifferenceMethod1D();
-    virtual void getSolution() override;
+    virtual void setMesh(Mesh1D* mesh) override;
+    virtual std::vector<double> getSolution( std::vector<std::vector<double>>& matrixA, std::vector<double>& matrixB) override;
 
+private:
+    std::vector<std::vector<double>> matrixA;
+    std::vector<double> matrixB;
 
 };
 
