@@ -9,14 +9,13 @@ set(TASKS_DIR ${SRC_DIR}/tasks)
 
 
 include_directories(${SRC_DIR}/include)
-include_directories(${MESH_DIR}/include)
-include_directories(${METHODS_DIR}/include)
-include_directories(${TASKS_DIR}/include)
 
-
+find_package(Python3 REQUIRED COMPONENTS Development)
+include_directories(${Python3_INCLUDE_DIRS})
+include_directories(/usr/lib/python3.12/site-packages/numpy/_core/include)
 
 add_executable(SAPR ${SRC_DIR}/main.cpp )
-
+target_link_libraries(SAPR PRIVATE ${Python3_LIBRARIES})
 
 target_sources(SAPR PUBLIC
     ${MESH_DIR}/Mesh1D.cpp

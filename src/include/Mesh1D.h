@@ -11,6 +11,7 @@ public:
     virtual void printMesh() = 0;
     virtual int GetNumNodes(const char xyz) = 0;
     virtual double GetNodesPosition(const char xyz, int i) = 0;
+    virtual std::vector<double> GetNodesPosition(const char xyz) = 0;
 
 protected:
     //position of each node

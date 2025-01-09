@@ -8,7 +8,6 @@
 class Method1D{
 public:
     virtual ~Method1D() = default;
-    virtual void setMesh(Mesh1D* mesh1d) = 0;
     virtual std::vector<double> getSolution( std::vector<std::vector<double>>& matrixA, std::vector<double>& matrixB) = 0;
 protected:
     Mesh1D* mesh;

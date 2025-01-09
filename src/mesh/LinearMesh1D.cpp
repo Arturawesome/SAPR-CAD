@@ -1,7 +1,6 @@
 #include "LinearMesh1D.h"
 
 LinearMesh1D::LinearMesh1D(int numNodesX, double size_x ){
-    std::cout<<"LinearMesh1D::LinearMesh1D(int numNodesX, double size_x )\n ";
     numNodes['x'] = numNodesX;
     size['x'] = size_x;
 }
@@ -19,11 +18,13 @@ int LinearMesh1D:: GetNumNodes(const char xyz){
 }
 
 void LinearMesh1D::generateMesh(){
-    std::cout<<"void LinearMesh1D::generateMesh()\n";
+
     dx =  size['x'] / (numNodes['x'] -1);
+
     for(int i = 0; i < numNodes['x']; ++i){
         nodesPosition2['x'].push_back(i * dx);
         nodesPosition.push_back(i * dx);
+
         if( i == 0 || i ==  numNodes['x']-1){
             boundaryNodesId.push_back(i );
             boundaryNodesId2['x'].push_back(i );
@@ -47,7 +48,7 @@ void LinearMesh1D::generateMesh(){
 void LinearMesh1D::printMesh(){
     std::cout << "Nodes:\n";
     for (size_t i = 0; i < nodesPosition.size(); ++i) {
-        std::cout << i << ": (" << nodesPosition[i] << ", ";
+        std::cout << i << ": " << nodesPosition[i] << ", ";
     }
 
     std::cout << "\n Elements:\n";
@@ -85,4 +86,12 @@ void LinearMesh1D::saveMesh(std::string name_file) {
 
 double LinearMesh1D:: GetNodesPosition(const char xyz, int i) {
     return nodesPosition2[xyz][i];
+}
+
+std::vector<double> LinearMesh1D::GetNodesPosition(const char xyz) {
+    auto it = nodesPosition2.find(xyz);
+    if (it != nodesPosition2.end()) {
+        return it->second; // Возвращаем копию вектора
+    }
+    throw std::invalid_argument("Invalid coordinate key");
 }

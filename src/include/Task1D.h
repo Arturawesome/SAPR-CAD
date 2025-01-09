@@ -1,14 +1,18 @@
 #ifndef TASK1D_H
 #define TASK1D_H
 
+#include "matplotlibcpp.h"
 #include "Method1D.h"
 #include "Mesh1D.h"
+
 #include <vector>
 #include <unordered_map>
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include <memory>
+namespace plt = matplotlibcpp;
+
 class Task1D{
 protected:
     std::unique_ptr<Method1D> method;
@@ -34,6 +38,7 @@ public:
     virtual void solveTask() = 0;
     virtual void getTaskDescription() = 0;
     virtual void setMatrixAndConditions() = 0;
+    virtual void plotSolution(std::string nameFig) = 0;
 
 
 };

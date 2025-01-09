@@ -12,6 +12,7 @@ public:
     virtual void solveTask() override;
     virtual void getTaskDescription() override;
     virtual void setMatrixAndConditions() override;
+    virtual void plotSolution(std::string nameFig) override;
 
 private:
 

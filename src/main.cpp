@@ -6,12 +6,6 @@
 
 int main() {
 
-    LinearMesh1D proba1(5, 5);
-    proba1.generateMesh();
-    proba1.saveMesh("Mesh1d.txt");
-    proba1.printMesh();
-
-    FiniteDifferenceMethod1D numMethod;
 
     std::unordered_map<std::string, std::string> parameterOfTask = {
         //{"isStatic", "True"},
@@ -25,7 +19,7 @@ int main() {
         {"method", "FiniteDifferenceMethod1D"},
 
         {"meshType", "LinearMesh1D"},
-        {"N", "5"},
+        {"N", "15"},
         {"L", "1"},
 
         {"alpha", "25"},
