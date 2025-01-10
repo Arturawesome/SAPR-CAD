@@ -4,9 +4,11 @@
 #include "HeatTask1D.h"
 #include "FiniteDifferenceMethod1D.h"
 
+#include "TransportTask1D.h"
+
 int main() {
 
-
+/*
     std::unordered_map<std::string, std::string> parameterOfTask = {
         //{"isStatic", "True"},
         //{"time", "0"},
@@ -28,7 +30,27 @@ int main() {
     };
     HeatTask1D task(parameterOfTask);
     task.getTaskDescription();
-    task.solveTask();
+    task.solveTask(); */
+
+
+    std::unordered_map<std::string, std::string> parameterOfTask2 = {
+    {"method", "FiniteDifferenceMethod1D"},
+    {"meshType", "LinearMesh1D"},
+
+    {"L", "1"},
+    {"Nx", "5"}, //N=L/dx
+    {"time", "10"},
+    {"Nt", "25"}, //M=T/dt
+
+    {"isTransferSpeedConst", "true"},
+    {"transferSpeed", "1"},
+    {"leftBC", "0"},
+    {"rightBC", "0"},
+    {"initialC", "1"}, // not parser -> choose the variance 1 - sin; 2 - sum of two gauss
+    };
+    TransportTask1D task2(parameterOfTask2);
+    task2.getTaskDescription();
+    task2.solveTask();
 
     return 0;
 }

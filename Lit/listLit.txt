@@ -1,0 +1,3 @@
+https://nbviewer.org/github/yakovenko-ivan/Mat_Model_for_Tech_Phys/blob/6543ab5b4c9b90097037a2886ba1d0ef5a85cea4/files/Lesson_1/Lesson_1_3.ipynb?flush_cache=true
+
+Численные методы решения уравнения теплопроводности с запаздыванием. В. Г. Пименов

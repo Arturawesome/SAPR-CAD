@@ -11,12 +11,14 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
+#include <cmath>
 namespace plt = matplotlibcpp;
 
 class Task1D{
 protected:
     std::unique_ptr<Method1D> method;
     std::unique_ptr<Mesh1D> mesh;
+    std::unique_ptr<Mesh1D> meshT;
     std::unordered_map<std::string, std::string> paramtersOfTask;
 
     std::vector<std::vector<double>> matrixA;
@@ -29,7 +31,11 @@ protected:
     bool isStatic = true;
 
     double N = 1;
+    double Nt = 1;
+    double Nx = 1;
+    double L = 1;
     int dimension;
+    double сourantNumber = 0;
 
     std::vector<double> solution;
 
@@ -37,7 +43,6 @@ public:
     virtual ~Task1D() = default;
     virtual void solveTask() = 0;
     virtual void getTaskDescription() = 0;
-    virtual void setMatrixAndConditions() = 0;
     virtual void plotSolution(std::string nameFig) = 0;
 
 

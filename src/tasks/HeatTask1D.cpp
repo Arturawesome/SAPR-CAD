@@ -125,11 +125,10 @@ void HeatTask1D::plotSolution(std::string nameFig){
     //std::cout<<"void HeatTask1D::plotSolution()\n";
     std::vector<double> x =  mesh -> GetNodesPosition('x');
 
-    plt::figure();
+
     plt::plot(x, solution, "o-");
-    plt::grid(true);
     plt::show();
-    plt::clf();
+    //plt::clf();
 
 }
 

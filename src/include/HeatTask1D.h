@@ -11,8 +11,8 @@ public:
     HeatTask1D(std::unordered_map<std::string, std::string> param);
     virtual void solveTask() override;
     virtual void getTaskDescription() override;
-    virtual void setMatrixAndConditions() override;
     virtual void plotSolution(std::string nameFig) override;
+    void setMatrixAndConditions();
 
 private:
 
@@ -21,7 +21,7 @@ private:
 
     double Tleft = -1, Tright = -1;
     double alpha = -1;
-    double L = -1;
+
 
 };
 

@@ -21,11 +21,12 @@ target_sources(SAPR PUBLIC
     ${MESH_DIR}/Mesh1D.cpp
     ${MESH_DIR}/LinearMesh1D.cpp
 
-    ${MESH_DIR}/Mesh2D.cpp
-    ${MESH_DIR}/RectangleMesh2D.cpp
+    # ${MESH_DIR}/Mesh2D.cpp
+    # ${MESH_DIR}/RectangleMesh2D.cpp
 
     ${METHODS_DIR}/Method1D.cpp
     ${METHODS_DIR}/FiniteDifferenceMethod1D.cpp
 
     ${TASKS_DIR}/HeatTask1D.cpp
+    ${TASKS_DIR}/TransportTask1D.cpp
 )
