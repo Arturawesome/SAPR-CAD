@@ -1,40 +1,42 @@
 #include "LinearMesh1D.h"
 
-LinearMesh1D::LinearMesh1D(int numNodesX, double size_x ){
-    numNodes['x'] = numNodesX;
-    size['x'] = size_x;
+LinearMesh1D::LinearMesh1D(int numNodesX, double size_x, const char xyzt){
+    numNodes[xyzt] = numNodesX;
+    size[xyzt] = size_x;
+    this->xyzt = xyzt;
 }
 
 LinearMesh1D::LinearMesh1D(){
     //std::cout<<"LinearMesh1D() numNodesX = 10; numNodesY = 10; size_x = 1; size_y = 1\n ";
     numNodes['x'] = 10;
     size['x'] = 1;
+    this->xyzt = 'x';
 }
 
 
-int LinearMesh1D:: GetNumNodes(const char xyz){
+int LinearMesh1D:: GetNumNodes(const char xyzt){
     //std::cout<<"GetNumNodes\n";
-    return numNodes[xyz];
+    return numNodes[xyzt];
 }
 
 void LinearMesh1D::generateMesh(){
 
-    dx =  size['x'] / (numNodes['x'] -1);
+    dx =  size[xyzt] / (numNodes[xyzt] -1);
 
-    for(int i = 0; i < numNodes['x']; ++i){
-        nodesPosition2['x'].push_back(i * dx);
+    for(int i = 0; i < numNodes[xyzt]; ++i){
+        nodesPosition2[xyzt].push_back(i * dx);
         nodesPosition.push_back(i * dx);
 
-        if( i == 0 || i ==  numNodes['x']-1){
+        if( i == 0 || i ==  numNodes[xyzt]-1){
             boundaryNodesId.push_back(i );
-            boundaryNodesId2['x'].push_back(i );
+            boundaryNodesId2[xyzt].push_back(i );
         }
     }
 
-    for(int i = 0; i < numNodes['x']; ++i){
-        if (i < numNodes['x']-1 ){
+    for(int i = 0; i < numNodes[xyzt]; ++i){
+        if (i < numNodes[xyzt]-1 ){
                 elementsId.push_back({i, i+1});
-                if(i == 0 || i == numNodes['x']-2 ){
+                if(i == 0 || i == numNodes[xyzt]-2 ){
                     boundaryElements.push_back({i, i+1});
                 }
             } else {
@@ -67,12 +69,12 @@ void LinearMesh1D::saveMesh(std::string name_file) {
         std::cerr << "Error: File is not open!" << std::endl;
         return;
     }
-    for(int i = 0; i < numNodes['x']; ++i){
+    for(int i = 0; i < numNodes[xyzt]; ++i){
         outFile <<std::setw(5) << nodesPosition[i]<<";      ";
     }
 
     outFile << std::endl;
-    for(int i = 0; i < numNodes['x']; ++i) {
+    for(int i = 0; i < numNodes[xyzt]; ++i) {
         outFile <<std::setw(3) << elementsId[i][0]<< std::setw(3) << elementsId[i][1]<< ";      ";
     }
     outFile << std::endl;
@@ -84,12 +86,12 @@ void LinearMesh1D::saveMesh(std::string name_file) {
 
 
 
-double LinearMesh1D:: GetNodesPosition(const char xyz, int i) {
-    return nodesPosition2[xyz][i];
+double LinearMesh1D:: GetNodesPosition(const char xyzt, int i) {
+    return nodesPosition2[xyzt][i];
 }
 
-std::vector<double> LinearMesh1D::GetNodesPosition(const char xyz) {
-    auto it = nodesPosition2.find(xyz);
+std::vector<double> LinearMesh1D::GetNodesPosition(const char xyzt) {
+    auto it = nodesPosition2.find(xyzt);
     if (it != nodesPosition2.end()) {
         return it->second; // Возвращаем копию вектора
     }

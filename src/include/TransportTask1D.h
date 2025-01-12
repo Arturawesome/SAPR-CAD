@@ -14,9 +14,17 @@ public:
 
 
 private:
+    std::function<double(double)> leftBC_;
+    std::function<double(double)> rightBC_;
+    std::function<double(double)> initialC_;
+
+    std::vector<double> u_;
+    std::vector<double> uNext_;
+    std::vector<double> uPrev_;
+
     double transferSpeed;
-    double leftBC, rightBC;
-    int initialC;
+    double lBC, rBC;
+    int initialCid;
     bool isTransferSpeedConst;
 
 };

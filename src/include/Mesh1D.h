@@ -9,11 +9,12 @@ public:
     virtual void generateMesh() = 0;
     virtual void saveMesh(std::string name_file) = 0;
     virtual void printMesh() = 0;
-    virtual int GetNumNodes(const char xyz) = 0;
-    virtual double GetNodesPosition(const char xyz, int i) = 0;
-    virtual std::vector<double> GetNodesPosition(const char xyz) = 0;
+    virtual int GetNumNodes(const char xyzt) = 0;
+    virtual double GetNodesPosition(const char xyzt, int i) = 0;
+    virtual std::vector<double> GetNodesPosition(const char xyzt) = 0;
 
 protected:
+    char xyzt;
     //position of each node
     std::vector<double> nodesPosition;
     std::unordered_map<char, std::vector<double>> nodesPosition2;

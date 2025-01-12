@@ -8,11 +8,17 @@
 class LaxWendroffMethod1D: public Method1D{
 public:
     LaxWendroffMethod1D();
-    virtual std::vector<double> getSolution( std::vector<std::vector<double>>& matrixA, std::vector<double>& matrixB) override;
+    virtual void getExplicitSolution() override;
 
 private:
-    std::vector<std::vector<double>> matrixA;
-    std::vector<double> matrixB;
+    std::function<double(double)> leftBC_;
+    std::function<double(double)> rightBC_;
+    std::function<double(double)> initialC_;
+
+    std::vector<double> u_;
+    std::vector<double> uNext_;
+    std::vector<double> uPrev_;
+    double сourantNumber_, t_;
 
 };
 

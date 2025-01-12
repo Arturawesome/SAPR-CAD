@@ -34,19 +34,19 @@ int main() {
 
 
     std::unordered_map<std::string, std::string> parameterOfTask2 = {
-    {"method", "FiniteDifferenceMethod1D"},
+    {"method", "LaxWendroffMethod1D"},
     {"meshType", "LinearMesh1D"},
 
     {"L", "1"},
     {"Nx", "5"}, //N=L/dx
-    {"time", "10"},
-    {"Nt", "25"}, //M=T/dt
+    {"time", "2"},
+    {"Nt", "15"}, //M=T/dt
 
     {"isTransferSpeedConst", "true"},
     {"transferSpeed", "1"},
     {"leftBC", "0"},
     {"rightBC", "0"},
-    {"initialC", "1"}, // not parser -> choose the variance 1 - sin; 2 - sum of two gauss
+    {"initialCid", "0"}, // not parser -> choose the variance 1 - sin; 2 - sum of two gauss
     };
     TransportTask1D task2(parameterOfTask2);
     task2.getTaskDescription();

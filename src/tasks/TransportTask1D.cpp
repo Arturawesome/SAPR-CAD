@@ -15,16 +15,24 @@ TransportTask1D::TransportTask1D(std::unordered_map<std::string, std::string> pa
         } else if (pair.first == "time") {
             time = std::stod(pair.second);
         } else if (pair.first == "leftBC") {
-            leftBC = std::stod(pair.second);
+            lBC = std::stod(pair.second);
         } else if (pair.first == "rightBC") {
-            rightBC = std::stod(pair.second);
-        } else if (pair.first == "initialC") {
-            initialC = std::stod(pair.second);
+            rBC = std::stod(pair.second);
+        } else if (pair.first == "initialCid") {
+            initialCid = std::stod(pair.second);
         } else if (pair.first == "isTransferSpeedConst") {
             isTransferSpeedConst = pair.second == "false";
         }
     }
     std::cout<<"transferSpeed = "<<transferSpeed<<"\n";
+    leftBC_ = [](double lbc) { return lbc; };
+    leftBC_ = [](double rbc ) { return rbc; };
+    if(initialCid == 0){
+        initialC_ = [](double x) {
+            return std::exp(-std::pow(x - 3.0, 2) / 0.25) + std::exp(-std::pow(x - 4.0, 2) / 0.25);
+        };
+    }
+
 }
 
 
@@ -39,20 +47,31 @@ void TransportTask1D::solveTask(){
         mesh -> printMesh();
         std::cout<<"\n\n";
 
-        meshT = std::make_unique<LinearMesh1D>(Nt, time);
+        meshT = std::make_unique<LinearMesh1D>(Nt, time, 't');
         meshT -> generateMesh();
         std::cout<<"time: \n";
         meshT -> printMesh();
         std::cout<<"\n\n";
 
     }
-    сourantNumber = mesh->GetNodesPosition('x', 0) - mesh->GetNodesPosition('x', 1);
+    double dx = mesh->GetNodesPosition('x', 1) - mesh->GetNodesPosition('x', 0);
+    double dt = meshT->GetNodesPosition('t', 1) - meshT->GetNodesPosition('t', 0);
+    std::cout<<"L = "<<L<<";  time = "<<time <<"\n\n";
+    std::cout<<"Nx = "<<Nx<<";  Nt = "<<Nt <<"\n\n";
+    std::cout<<"dx = "<<dx<<";  dt = "<<dt<<"\n\n";
+    сourantNumber = transferSpeed * dt / dx;
+    std::cout<<"сourantNumber = "<<сourantNumber<<"\n\n";
+
+    if(сourantNumber > 1) {
+        std::cout<<"!!!!!!!!!! WARNING !!!!!!!!!! WARNING !!!!!!!!!!\n!!!!!!!!!! WARNING !!!!!!!!!! WARNING !!!!!!!!!!\n\n";
+        std::cout<<"Your Courant number more then 1";
+    }
 
 
-    if(paramtersOfTask["method"] == "FiniteDifferenceMethod1D"){
+    if(paramtersOfTask["method"] == "LaxWendroffMethod1D"){
         std::cout<<"L = "<<L<<";  N = "<<N <<"\n\n";
-        // setMatrixAndConditions();
-        // method = std::make_unique<FiniteDifferenceMethod1D>();
+
+        //method = std::make_unique<LaxWendroffMethod1D>();
         //
         // solution = method -> getSolution(matrixA, matrixB);
         // plotSolution("HeatTask1D_" + paramtersOfTask["method"] + "_" + paramtersOfTask["meshType"] );
@@ -69,8 +88,8 @@ void TransportTask1D::getTaskDescription(){
 
 
     std::cout<< "transferSpeed = "<<transferSpeed<<"\n";
-    std::cout<<" initialC = "<< initialC <<"\n";
-    std::cout<< "leftBC = "<< leftBC<< ";  rightBC = "<< rightBC<<"\n";
+    std::cout<<" initialCid = "<< initialCid <<"\n";
+    std::cout<< "leftBC = "<< lBC<< ";  rightBC = "<< rBC<<"\n";
     std::cout<< "Nx = "<< Nx<<"; Nt = "<<Nt << ";  L = "<< L<<"\n";
 
 }

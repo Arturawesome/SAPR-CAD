@@ -38,6 +38,7 @@ protected:
     double сourantNumber = 0;
 
     std::vector<double> solution;
+    std::vector<std::vector<double>> solutionTime;
 
 public:
     virtual ~Task1D() = default;

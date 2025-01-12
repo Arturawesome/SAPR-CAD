@@ -4,11 +4,17 @@
 
 #include <unordered_map>
 #include <vector>
-
+#include <functional>
 class Method1D{
 public:
     virtual ~Method1D() = default;
-    virtual std::vector<double> getSolution( std::vector<std::vector<double>>& matrixA, std::vector<double>& matrixB) = 0;
+    virtual std::vector<double> getSolution( std::vector<std::vector<double>>& matrixA, std::vector<double>& matrixB){
+        std::cout<<"virtual std::vector<double> getSolution( std::vector<std::vector<double>>& matrixA, std::vector<double>& matrixB)\n";
+    }
+    // Для явных методов: выполняет итерационный шаг.
+    virtual void getExplicitSolution() {
+        std::cout<<"virtual void performExplicitStep(double timeStep)\n";
+    }
 protected:
     Mesh1D* mesh;
     std::unordered_map<std::string, double> paramtersOfTask;
