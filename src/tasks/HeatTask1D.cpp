@@ -1,7 +1,7 @@
 #include "HeatTask1D.h"
 
 HeatTask1D::HeatTask1D(std::unordered_map<std::string, std::string> param){
-    this->paramtersOfTask = param;
+    this->paramtersOfTask_ = param;
 
     for(const auto &pair: param){
         if(pair.first == "isStatic") {
@@ -58,21 +58,21 @@ void HeatTask1D::getTaskDescription(){
 
 void HeatTask1D::solveTask(){
     std::cout<<"void HeatTask1D::solveTask()\n";
-    if(paramtersOfTask["meshType"] == "LinearMesh1D"){
+    if(paramtersOfTask_["mesh_Type"] == "LinearMesh1D"){
         std::cout<<"L = "<<L<<";  N = "<<N <<"\n\n";
-        mesh = std::make_unique<LinearMesh1D>(N, L);
-        mesh -> generateMesh();
+        mesh_ = std::make_unique<LinearMesh1D>(N, L);
+        mesh_ -> generateMesh();
 //        std::cout<<"LinearMesh1D was created\n";
-        mesh -> printMesh();
+        mesh_ -> printMesh();
     }
 
 
-    if(paramtersOfTask["method"] == "FiniteDifferenceMethod1D"){
+    if(paramtersOfTask_["method"] == "FiniteDifferenceMethod1D"){
         setMatrixAndConditions();
-        method = std::make_unique<FiniteDifferenceMethod1D>();
+        method_ = std::make_unique<FiniteDifferenceMethod1D>();
 
-        solution = method -> getSolution(matrixA, matrixB);
-        plotSolution("HeatTask1D_" + paramtersOfTask["method"] + "_" + paramtersOfTask["meshType"] );
+        solution = method_ -> getSolution(matrixA, matrixB);
+        plotSolution("HeatTask1D_" + paramtersOfTask_["method"] + "_" + paramtersOfTask_["meshType"] );
     }
 
 }
@@ -85,7 +85,7 @@ void HeatTask1D::setMatrixAndConditions(){
     matrixA.resize(N, std::vector<double>(N, 0.0));
 
     for(int i = 1 ; i < N-1; ++i){
-        dx = mesh->GetNodesPosition('x', i) - mesh->GetNodesPosition('x', i-1);
+        dx = mesh_->GetNodesPosition('x', i) - mesh_->GetNodesPosition('x', i-1);
         coeff = alpha * dx* dx;
 
         std::vector<double> v(N, 0);
@@ -123,7 +123,7 @@ void HeatTask1D::setMatrixAndConditions(){
 
 void HeatTask1D::plotSolution(std::string nameFig){
     //std::cout<<"void HeatTask1D::plotSolution()\n";
-    std::vector<double> x =  mesh -> GetNodesPosition('x');
+    std::vector<double> x =  mesh_ -> GetNodesPosition('x');
 
 
     plt::plot(x, solution, "o-");

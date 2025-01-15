@@ -16,10 +16,10 @@ namespace plt = matplotlibcpp;
 
 class Task1D{
 protected:
-    std::unique_ptr<Method1D> method;
-    std::unique_ptr<Mesh1D> mesh;
-    std::unique_ptr<Mesh1D> meshT;
-    std::unordered_map<std::string, std::string> paramtersOfTask;
+    std::unique_ptr<Method1D> method_;
+    std::unique_ptr<Mesh1D> mesh_;
+    std::unique_ptr<Mesh1D> meshT_;
+    std::unordered_map<std::string, std::string> paramtersOfTask_;
 
     std::vector<std::vector<double>> matrixA;
     std::vector<double> matrixB;

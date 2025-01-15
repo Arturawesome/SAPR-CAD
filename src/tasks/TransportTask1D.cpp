@@ -1,11 +1,11 @@
 #include "TransportTask1D.h"
 
 TransportTask1D::TransportTask1D(std::unordered_map<std::string, std::string> param){
-    this->paramtersOfTask = param;
+    this->paramtersOfTask_ = param;
 
-    for(const auto & pair: paramtersOfTask){
+    for(const auto & pair: paramtersOfTask_){
         if(pair.first == "transferSpeed"){
-            transferSpeed = std::stod(pair.second);
+            transferSpeed_ = std::stod(pair.second);
         } else if (pair.first == "Nx") {
             Nx = std::stod(pair.second);
         } else if (pair.first == "Nt") {
@@ -15,19 +15,22 @@ TransportTask1D::TransportTask1D(std::unordered_map<std::string, std::string> pa
         } else if (pair.first == "time") {
             time = std::stod(pair.second);
         } else if (pair.first == "leftBC") {
-            lBC = std::stod(pair.second);
+            lBC_ = std::stod(pair.second);
         } else if (pair.first == "rightBC") {
-            rBC = std::stod(pair.second);
-        } else if (pair.first == "initialCid") {
-            initialCid = std::stod(pair.second);
+            rBC_ = std::stod(pair.second);
+        } else if (pair.first == "initialCid_") {
+            initialCid_ = std::stod(pair.second);
         } else if (pair.first == "isTransferSpeedConst") {
-            isTransferSpeedConst = pair.second == "false";
+            isTransferSpeedConst_ = pair.second == "false";
         }
     }
-    std::cout<<"transferSpeed = "<<transferSpeed<<"\n";
-    leftBC_ = [](double lbc) { return lbc; };
-    leftBC_ = [](double rbc ) { return rbc; };
-    if(initialCid == 0){
+
+    std::cout<<"transferSpeed_ = "<<transferSpeed_<<"\n";
+
+    double local_lbc = lBC_, local_rbc = rBC_;
+    leftBC_ = [local_lbc](double _) { return local_lbc; };
+    rightBC_ = [local_rbc](double _) { return local_rbc; };
+    if(initialCid_ == 0){
         initialC_ = [](double x) {
             return std::exp(-std::pow(x - 3.0, 2) / 0.25) + std::exp(-std::pow(x - 4.0, 2) / 0.25);
         };
@@ -39,27 +42,27 @@ TransportTask1D::TransportTask1D(std::unordered_map<std::string, std::string> pa
 void TransportTask1D::solveTask(){
     std::cout<<"void TransportTask1D::solveTask()\n ";
 
-    if(paramtersOfTask["meshType"] == "LinearMesh1D"){
+    if(paramtersOfTask_["meshType"] == "LinearMesh1D"){
         std::cout<<"L = "<<L<<";  N = "<<N <<"\n\n";
-        mesh = std::make_unique<LinearMesh1D>(Nx, L);
-        mesh -> generateMesh();
+        mesh_ = std::make_unique<LinearMesh1D>(Nx, L);
+        mesh_ -> generateMesh();
         std::cout<<"L: \n";
-        mesh -> printMesh();
+        mesh_ -> printMesh();
         std::cout<<"\n\n";
 
-        meshT = std::make_unique<LinearMesh1D>(Nt, time, 't');
-        meshT -> generateMesh();
+        meshT_ = std::make_unique<LinearMesh1D>(Nt, time, 't');
+        meshT_-> generateMesh();
         std::cout<<"time: \n";
-        meshT -> printMesh();
+        meshT_ -> printMesh();
         std::cout<<"\n\n";
 
     }
-    double dx = mesh->GetNodesPosition('x', 1) - mesh->GetNodesPosition('x', 0);
-    double dt = meshT->GetNodesPosition('t', 1) - meshT->GetNodesPosition('t', 0);
+    double dx = mesh_->GetNodesPosition('x', 1) - mesh_->GetNodesPosition('x', 0);
+    double dt = meshT_->GetNodesPosition('t', 1) - meshT_->GetNodesPosition('t', 0);
     std::cout<<"L = "<<L<<";  time = "<<time <<"\n\n";
     std::cout<<"Nx = "<<Nx<<";  Nt = "<<Nt <<"\n\n";
     std::cout<<"dx = "<<dx<<";  dt = "<<dt<<"\n\n";
-    сourantNumber = transferSpeed * dt / dx;
+    сourantNumber = transferSpeed_ * dt / dx;
     std::cout<<"сourantNumber = "<<сourantNumber<<"\n\n";
 
     if(сourantNumber > 1) {
@@ -68,13 +71,20 @@ void TransportTask1D::solveTask(){
     }
 
 
-    if(paramtersOfTask["method"] == "LaxWendroffMethod1D"){
+    if(paramtersOfTask_["method"] == "LaxWendroffMethod1D"){
         std::cout<<"L = "<<L<<";  N = "<<N <<"\n\n";
 
-        //method = std::make_unique<LaxWendroffMethod1D>();
+        method_ = std::make_unique<LaxWendroffMethod1D>(leftBC_,
+                                                       rightBC_,
+                                                       u_,
+                                                       uNext_,
+                                                       uPrev_,
+                                                       std::move(mesh_),
+                                                       std::move(meshT_),
+                                                       сourantNumber);
         //
         // solution = method -> getSolution(matrixA, matrixB);
-        // plotSolution("HeatTask1D_" + paramtersOfTask["method"] + "_" + paramtersOfTask["meshType"] );
+        // plotSolution("HeatTask1D_" + paramtersOfTask_["method"] + "_" + paramtersOfTask_["meshType"] );
     }
 }
 
@@ -84,12 +94,12 @@ void TransportTask1D::getTaskDescription(){
     std::cout<<"You are solving the transport equation with following paramters:\n";
 
     std::cout<< "time = "<< time<<"\n";
-    std::cout<< "isTransferSpeedConst = " << isTransferSpeedConst<<"\n";
+    std::cout<< "isTransferSpeedConst_ = " << isTransferSpeedConst_<<"\n";
 
 
-    std::cout<< "transferSpeed = "<<transferSpeed<<"\n";
-    std::cout<<" initialCid = "<< initialCid <<"\n";
-    std::cout<< "leftBC = "<< lBC<< ";  rightBC = "<< rBC<<"\n";
+    std::cout<< "transferSpeed_ = "<<transferSpeed_<<"\n";
+    std::cout<<" initialCid_ = "<< initialCid_ <<"\n";
+    std::cout<< "leftBC = "<< lBC_<< ";  rightBC = "<< rBC_<<"\n";
     std::cout<< "Nx = "<< Nx<<"; Nt = "<<Nt << ";  L = "<< L<<"\n";
 
 }

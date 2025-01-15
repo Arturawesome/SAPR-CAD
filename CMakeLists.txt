@@ -26,6 +26,7 @@ target_sources(SAPR PUBLIC
 
     ${METHODS_DIR}/Method1D.cpp
     ${METHODS_DIR}/FiniteDifferenceMethod1D.cpp
+    ${METHODS_DIR}/LaxWendroffMethod1D.cpp
 
     ${TASKS_DIR}/HeatTask1D.cpp
     ${TASKS_DIR}/TransportTask1D.cpp

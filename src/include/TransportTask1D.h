@@ -3,7 +3,7 @@
 
 #include "Task1D.h"
 #include "LinearMesh1D.h"
-#include "FiniteDifferenceMethod1D.h"
+#include "LaxWendroffMethod1D.h"
 
 class TransportTask1D: public Task1D{
 public:
@@ -22,10 +22,14 @@ private:
     std::vector<double> uNext_;
     std::vector<double> uPrev_;
 
-    double transferSpeed;
-    double lBC, rBC;
-    int initialCid;
-    bool isTransferSpeedConst;
+
+    double transferSpeed_;
+    double lBC_;
+    double rBC_;
+
+    int initialCid_;
+    bool isTransferSpeedConst_;
+
 
 };
 
