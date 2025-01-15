@@ -16,14 +16,20 @@ public:
                                                 return {};
                                             }
     // Для явных методов: выполняет итерационный шаг.
-    virtual void getExplicitSolution() {
+    virtual std::vector<std::vector<double>> getExplicitSolution() {
         std::cout<<"virtual void performExplicitStep(double timeStep)\n";
     }
+    virtual void numericalScheme(int ts) {}
 protected:
     Mesh1D* mesh;
     std::unordered_map<std::string, double> paramtersOfTask;
     std::vector<double> solution;
-    std::vector<std::vector<double>> solutionT;
+    std::vector<std::vector<double>> solutionT_;
+    int sizeMeshx_;
+    int sizeMesht_;
+
+
+
 
 };
 

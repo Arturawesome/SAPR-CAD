@@ -38,9 +38,9 @@ int main() {
     {"meshType", "LinearMesh1D"},
 
     {"L", "1"},
-    {"Nx", "5"}, //N=L/dx
-    {"time", "2"},
-    {"Nt", "15"}, //M=T/dt
+    {"Nx", "50"}, //N=L/dx
+    {"time", "1.5"},
+    {"Nt", "150"}, //M=T/dt
 
     {"isTransferSpeedConst", "true"},
     {"transferSpeed", "1"},

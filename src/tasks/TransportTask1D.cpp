@@ -43,18 +43,18 @@ void TransportTask1D::solveTask(){
     std::cout<<"void TransportTask1D::solveTask()\n ";
 
     if(paramtersOfTask_["meshType"] == "LinearMesh1D"){
-        std::cout<<"L = "<<L<<";  N = "<<N <<"\n\n";
+        //std::cout<<"L = "<<L<<";  Nx = "<<Nx <<"\n\n";
         mesh_ = std::make_unique<LinearMesh1D>(Nx, L);
         mesh_ -> generateMesh();
-        std::cout<<"L: \n";
-        mesh_ -> printMesh();
-        std::cout<<"\n\n";
+        // std::cout<<"L: \n";
+        // mesh_ -> printMesh();
+        // std::cout<<"\n\n";
 
         meshT_ = std::make_unique<LinearMesh1D>(Nt, time, 't');
         meshT_-> generateMesh();
-        std::cout<<"time: \n";
-        meshT_ -> printMesh();
-        std::cout<<"\n\n";
+        // std::cout<<"time: \n";
+        // meshT_ -> printMesh();
+        // std::cout<<"\n\n";
 
     }
     double dx = mesh_->GetNodesPosition('x', 1) - mesh_->GetNodesPosition('x', 0);
@@ -65,6 +65,11 @@ void TransportTask1D::solveTask(){
     сourantNumber = transferSpeed_ * dt / dx;
     std::cout<<"сourantNumber = "<<сourantNumber<<"\n\n";
 
+    u_.resize(Nx, 0);
+    uNext_.resize(Nx, 0);
+    uPrev_.resize(Nx, 0);
+
+
     if(сourantNumber > 1) {
         std::cout<<"!!!!!!!!!! WARNING !!!!!!!!!! WARNING !!!!!!!!!!\n!!!!!!!!!! WARNING !!!!!!!!!! WARNING !!!!!!!!!!\n\n";
         std::cout<<"Your Courant number more then 1";
@@ -72,19 +77,20 @@ void TransportTask1D::solveTask(){
 
 
     if(paramtersOfTask_["method"] == "LaxWendroffMethod1D"){
-        std::cout<<"L = "<<L<<";  N = "<<N <<"\n\n";
-
+        std::cout<<" if(paramtersOfTask_[\n";
         method_ = std::make_unique<LaxWendroffMethod1D>(leftBC_,
                                                        rightBC_,
+                                                        initialC_,
                                                        u_,
                                                        uNext_,
                                                        uPrev_,
                                                        std::move(mesh_),
                                                        std::move(meshT_),
                                                        сourantNumber);
-        //
-        // solution = method -> getSolution(matrixA, matrixB);
-        // plotSolution("HeatTask1D_" + paramtersOfTask_["method"] + "_" + paramtersOfTask_["meshType"] );
+        std::cout<<"method_ = std::make_unique<LaxWendroffMethod1D>\n";
+        method_ -> getExplicitSolution();
+
+
     }
 }
 
@@ -96,7 +102,6 @@ void TransportTask1D::getTaskDescription(){
     std::cout<< "time = "<< time<<"\n";
     std::cout<< "isTransferSpeedConst_ = " << isTransferSpeedConst_<<"\n";
 
-
     std::cout<< "transferSpeed_ = "<<transferSpeed_<<"\n";
     std::cout<<" initialCid_ = "<< initialCid_ <<"\n";
     std::cout<< "leftBC = "<< lBC_<< ";  rightBC = "<< rBC_<<"\n";
@@ -107,7 +112,12 @@ void TransportTask1D::getTaskDescription(){
 
 
 void TransportTask1D::plotSolution(std::string nameFig){
-    std::cout<<"void TransportTask1D::plotSolution()\n ";
+    //std::cout<<"void HeatTask1D::plotSolution()\n";
+    std::vector<double> x =  mesh_ -> GetNodesPosition('x');
+
+
+    plt::plot(x, method_ -> getExplicitSolution()[150], "o-");
+    plt::show();
 }
 
 
