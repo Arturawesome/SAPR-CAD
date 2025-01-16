@@ -16,9 +16,9 @@ namespace plt = matplotlibcpp;
 
 class Task1D{
 protected:
-    std::unique_ptr<Method1D> method_;
-    std::unique_ptr<Mesh1D> mesh_;
-    std::unique_ptr<Mesh1D> meshT_;
+    std::shared_ptr<Method1D> method_;
+    std::shared_ptr<Mesh1D> mesh_;
+    std::shared_ptr<Mesh1D> meshT_;
     std::unordered_map<std::string, std::string> paramtersOfTask_;
 
     std::vector<std::vector<double>> matrixA;
@@ -38,7 +38,7 @@ protected:
     double сourantNumber = 0;
 
     std::vector<double> solution;
-    std::vector<std::vector<double>> solutionTime;
+    std::vector<std::vector<double>> solutionT_;
 
 public:
     virtual ~Task1D() = default;

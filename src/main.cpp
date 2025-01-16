@@ -30,17 +30,17 @@ int main() {
     };
     HeatTask1D task(parameterOfTask);
     task.getTaskDescription();
-    task.solveTask(); */
-
+    task.solveTask();
+    std::cout<<"\n\n\n\n\n\n";*/
 
     std::unordered_map<std::string, std::string> parameterOfTask2 = {
     {"method", "LaxWendroffMethod1D"},
     {"meshType", "LinearMesh1D"},
 
-    {"L", "1"},
-    {"Nx", "50"}, //N=L/dx
-    {"time", "1.5"},
-    {"Nt", "150"}, //M=T/dt
+    {"L", "10"},
+    {"Nx", "500"}, //N=L/dx
+    {"time", "3.5"},
+    {"Nt", "350"}, //M=T/dt
 
     {"isTransferSpeedConst", "true"},
     {"transferSpeed", "1"},

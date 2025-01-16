@@ -58,18 +58,18 @@ void HeatTask1D::getTaskDescription(){
 
 void HeatTask1D::solveTask(){
     std::cout<<"void HeatTask1D::solveTask()\n";
-    if(paramtersOfTask_["mesh_Type"] == "LinearMesh1D"){
+    if(paramtersOfTask_["meshType"] == "LinearMesh1D"){
         std::cout<<"L = "<<L<<";  N = "<<N <<"\n\n";
-        mesh_ = std::make_unique<LinearMesh1D>(N, L);
+        mesh_ = std::make_shared<LinearMesh1D>(N, L);
         mesh_ -> generateMesh();
-//        std::cout<<"LinearMesh1D was created\n";
+        std::cout<<"LinearMesh1D was created\n";
         mesh_ -> printMesh();
     }
 
 
     if(paramtersOfTask_["method"] == "FiniteDifferenceMethod1D"){
         setMatrixAndConditions();
-        method_ = std::make_unique<FiniteDifferenceMethod1D>();
+        method_ = std::make_shared<FiniteDifferenceMethod1D>();
 
         solution = method_ -> getSolution(matrixA, matrixB);
         plotSolution("HeatTask1D_" + paramtersOfTask_["method"] + "_" + paramtersOfTask_["meshType"] );

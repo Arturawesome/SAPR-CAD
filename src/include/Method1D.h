@@ -15,10 +15,9 @@ public:
                                             std::vector<double>& matrixB){
                                                 return {};
                                             }
-    // Для явных методов: выполняет итерационный шаг.
-    virtual std::vector<std::vector<double>> getExplicitSolution() {
-        std::cout<<"virtual void performExplicitStep(double timeStep)\n";
-    }
+
+    virtual std::vector<std::vector<double>> getExplicitSolution() {}
+    virtual void setInitialConditions() {}
     virtual void numericalScheme(int ts) {}
 protected:
     Mesh1D* mesh;

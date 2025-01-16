@@ -13,11 +13,12 @@ public:
                         std::vector<double>& u,
                         std::vector<double>& uNext,
                         std::vector<double>& uPrev,
-                        std::unique_ptr<Mesh1D>&& meshx,
-                        std::unique_ptr<Mesh1D>&& meshT,
+                        std::shared_ptr<Mesh1D> meshx,
+                        std::shared_ptr<Mesh1D> meshT,
                         double сourantNumber
                         );
     virtual std::vector<std::vector<double>> getExplicitSolution() override;
+    virtual void setInitialConditions() override;
     virtual void numericalScheme(int ts) override;
 private:
     std::function<double(double)> leftBC_;
@@ -28,8 +29,8 @@ private:
     std::vector<double> uNext_;
     std::vector<double> uPrev_;
 
-    std::unique_ptr<Mesh1D> meshx_;
-    std::unique_ptr<Mesh1D> meshT_;
+    std::shared_ptr<Mesh1D> meshx_;
+    std::shared_ptr<Mesh1D> meshT_;
 
     double сourantNumber_, t_;
 
