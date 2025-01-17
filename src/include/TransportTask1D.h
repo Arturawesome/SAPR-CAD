@@ -11,6 +11,8 @@ public:
     virtual void solveTask() override;
     virtual void getTaskDescription() override;
     virtual void plotSolution(std::string nameFig) override;
+    virtual void saveTask() override;
+
 
 
 private:

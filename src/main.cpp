@@ -36,6 +36,7 @@ int main() {
     std::unordered_map<std::string, std::string> parameterOfTask2 = {
     {"method", "LaxWendroffMethod1D"},
     {"meshType", "LinearMesh1D"},
+    {"isStatic", "false"},
 
     {"L", "10"},
     {"Nx", "500"}, //N=L/dx
@@ -51,6 +52,7 @@ int main() {
     TransportTask1D task2(parameterOfTask2);
     task2.getTaskDescription();
     task2.solveTask();
+    task2.saveTask();
 
     return 0;
 }

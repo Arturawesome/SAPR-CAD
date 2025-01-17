@@ -28,7 +28,7 @@ protected:
     bool useCustomMethod = false;
 
     double time = -1, dt = -1;
-    bool isStatic = true;
+    bool isStatic_ = true;
 
     double N = 1;
     double Nt = 1;
@@ -45,8 +45,33 @@ public:
     virtual void solveTask() = 0;
     virtual void getTaskDescription() = 0;
     virtual void plotSolution(std::string nameFig) = 0;
+    virtual void saveTask() {}
 
 
 };
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

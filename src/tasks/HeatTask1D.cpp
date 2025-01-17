@@ -5,7 +5,7 @@ HeatTask1D::HeatTask1D(std::unordered_map<std::string, std::string> param){
 
     for(const auto &pair: param){
         if(pair.first == "isStatic") {
-            isStatic = pair.second == "true";
+            isStatic_ = pair.second == "true";
         } else if (pair.first == "isInternalHeatSource") {
             isInternalHeatSource = pair.second == "true";
         } else if (pair.first == "time") {
@@ -45,7 +45,7 @@ void HeatTask1D::getTaskDescription(){
     std::cout<< "useCustomMesh = "<<useCustomMesh<<"\n";
 
     std::cout<< "time = "<< time<<";  dt = "<<dt<<"\n";
-    std::cout<< "isStatic = " << isStatic<<"\n";
+    std::cout<< "isStatic_ = " << isStatic_<<"\n";
 
     std::cout<< "isInternalHeatSource = " << isInternalHeatSource<<"\n";
     std::cout<< "Xsource = "<< Xsource << ";  Ysource = "<< Ysource<<"\n";
