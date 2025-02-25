@@ -7,20 +7,21 @@
 #include <unordered_map>
 #include <vector>
 
-class ImplicitMethod1D {
-public:
-  virtual ~ImplicitMethod1D() = default;
-  virtual getSolution() = 0;
-  virtual setMatrix() {}
-  virtual setMatrixT() {}
+class ImplicitMethod1D
+{
+  public:
+    virtual ~ImplicitMethod1D() = default;
+    virtual getSolution() = 0;
+    virtual setMatrix() {}
+    virtual setMatrixT() {}
 
-protected:
-  std::vectro<std::vecotor<double>> matrixA_;
-  std::vectro<std::vecotor<double>> matrixBT_;
-  std::vecotor<double> matrixB_;
+  protected:
+    std::vectro<std::vecotor<double>> matrixA_;
+    std::vectro<std::vecotor<double>> matrixBT_;
+    std::vecotor<double> matrixB_;
 
-  std::vector<double> solution_;
-  std::vectro<std::vecotor<double>> solutionT_;
+    std::vector<double> solution_;
+    std::vectro<std::vecotor<double>> solutionT_;
 };
 
 #endif

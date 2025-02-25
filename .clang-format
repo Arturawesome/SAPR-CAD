@@ -1,0 +1,23 @@
+Language:        Cpp
+BasedOnStyle:    LLVM
+IndentWidth:     4
+UseTab:          Never
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass:      true
+  AfterFunction:   true
+  AfterNamespace:  true
+  AfterStruct:     true
+  AfterUnion:      true
+  BeforeCatch:     true
+  BeforeElse:      true
+  IndentBraces:    false
+ColumnLimit:     0  # Отключает ограничение длины строки
+AllowShortFunctionsOnASingleLine: Empty
+IndentCaseLabels: true
+AlwaysBreakTemplateDeclarations: true
+SpacesBeforeTrailingComments: 1
+SpaceAfterCStyleCast: true
+PointerAlignment: Left
+DerivePointerAlignment: false
+SortIncludes: true
