@@ -1,0 +1,27 @@
+clang-format -n src/methods/include/*.h
+clang-format -n src/methods/*.cpp
+
+clang-format -n src/mesh/include/*.h
+clang-format -n src/mesh/*.cpp
+
+clang-format -n src/tasks/include/*.h
+clang-format -n src/tasks/*.cpp
+clang-format -n src/main.cpp
+
+clang-format -i src/methods/include/*.h
+clang-format -i src/methods/*.cpp
+
+clang-format -i src/mesh/include/*.h
+clang-format -i src/mesh/*.cpp
+
+clang-format -i src/tasks/include/*.h
+clang-format -i src/tasks/*.cpp
+clang-format -i src/main.cpp
+
+echo "clang-format was emplement"
+
+
+cppcheck -i src/methods/*.cpp
+cppcheck -i src/mesh/*.cpp
+cppcheck -i src/tasks/*.cpp
+cppcheck -i src/main.cpp

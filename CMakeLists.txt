@@ -8,11 +8,17 @@ set(METHODS_DIR ${SRC_DIR}/methods)
 set(TASKS_DIR ${SRC_DIR}/tasks)
 
 
-include_directories(${SRC_DIR}/include)
+include_directories(${SRC_DIR}/mesh/include)
+include_directories(${SRC_DIR}/methods/include)
+include_directories(${SRC_DIR}/tasks/include)
 
+
+include_directories(${SRC_DIR}/include)
 find_package(Python3 REQUIRED COMPONENTS Development)
 include_directories(${Python3_INCLUDE_DIRS})
-include_directories(/usr/lib/python3.12/site-packages/numpy/_core/include)
+include_directories(/usr/lib/python3.13/site-packages/numpy/_core/include)
+
+
 
 add_executable(SAPR ${SRC_DIR}/main.cpp )
 target_link_libraries(SAPR PRIVATE ${Python3_LIBRARIES})
